@@ -24,6 +24,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+}
+repositories {
+    jcenter()
 }
 
 dependencies {
@@ -40,4 +47,10 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:${camerax_version}"
     implementation"androidx.camera:camera-view:1.0.0-alpha12"
     implementation "androidx.camera:camera-extensions:1.0.0-alpha12"
+    implementation 'org.tensorflow:tensorflow-android:+'
+//    implementation 'org.tensorflow:tensorflow-lite-support:0.0.0-nightly'
+    // Build off of nightly TensorFlow Lite
+    implementation('org.tensorflow:tensorflow-lite:0.0.0-nightly') { changing = true }
+    implementation('org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly') { changing = true }
+    implementation('org.tensorflow:tensorflow-lite-support:0.0.0-nightly') { changing = true }
 }

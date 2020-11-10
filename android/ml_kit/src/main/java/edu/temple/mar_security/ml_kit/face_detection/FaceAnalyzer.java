@@ -1,6 +1,7 @@
 package edu.temple.mar_security.ml_kit.face_detection;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.graphics.Rect;
 import android.media.Image;
 import android.util.Log;

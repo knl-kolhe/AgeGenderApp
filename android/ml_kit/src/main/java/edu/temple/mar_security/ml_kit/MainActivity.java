@@ -1,6 +1,7 @@
 package edu.temple.mar_security.ml_kit;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         cameraExecutor = Executors.newSingleThreadExecutor();
-        processor = new FaceProcessor(this);
+        processor = new FaceProcessor(MainActivity.this);
 
         previewView = findViewById(R.id.viewFinder);
         graphicOverlay = findViewById(R.id.graphicOverlay);
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity
 
                         FaceAnalyzer imageAnalyzer =
                                 new FaceAnalyzer(processor, ACCURACY_OVER_SPEED, graphicOverlay);
+//                        Activity mActivity = MainActivity.this;
                         imageAnalyzer.analyze(imageProxy);
                     });
 
