@@ -22,9 +22,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.temple.mar_security.ml_kit.MainActivity;
-import edu.temple.mar_security.ml_kit.tflite.Classifier;
 import edu.temple.mar_security.ml_kit.utils.FileIOUtil;
 
+import edu.temple.mar_security.ml_kit.tflite.Classifier;
+import edu.temple.mar_security.ml_kit.tflite.GenderClassifier;
 import edu.temple.mar_security.ml_kit.tflite.AgeClassifier;
 import edu.temple.mar_security.ml_kit.Logger;
 
@@ -129,15 +130,25 @@ public class FaceProcessor implements FaceAnalyzer.FaceAnalysisListener {
     private void performAdditionalProcessing(Bitmap model_input) {
         // empty
         Logger LOGGER = new Logger();
-        Classifier classifier = null;
+        Classifier ageClassifier = null;
         try {
-            classifier = new AgeClassifier(mActivity);
+            ageClassifier = new AgeClassifier(mActivity);
         } catch (IOException e) {
             LOGGER.e("Loading Age classifier");
         }
-        final List<Classifier.Recognition> results =
-                classifier.recognizeImage(model_input);
-        Log.i("Hello wtf", Arrays.toString(results.toArray()));
+        final List<Classifier.Recognition> resultsAge =
+                ageClassifier.recognizeImage(model_input);
+        Log.i("Age Classifier output", Arrays.toString(resultsAge.toArray()));
+
+        Classifier genderClassifier = null;
+        try {
+            genderClassifier = new GenderClassifier(mActivity);
+        } catch (IOException e) {
+            LOGGER.e("Loading Gender classifier");
+        }
+        final List<Classifier.Recognition> resultsGender =
+                genderClassifier.recognizeImage(model_input);
+        Log.i("Gender Classifier output", Arrays.toString(resultsGender.toArray()));
 
 
 //        Log.d("Path", context.getApplicationInfo().dataDir);
